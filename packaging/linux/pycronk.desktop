@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=pycronk
+Comment=Cifrado clásico híbrido de texto y archivos
+Exec=pycronk %F
+Icon=pycronk
+Terminal=false
+Categories=Utility;Security;

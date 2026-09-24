@@ -1,0 +1,306 @@
+/* Generado por builder.py a partir de tokens.py. No escribir colores aquí: usar variables de tokens.py. */
+
+QWidget {
+    color: $text_primary;
+    font-size: ${font_body}px;
+}
+
+QMainWindow, QWidget#Root {
+    background: $window;
+}
+
+QToolTip {
+    background: $card;
+    color: $text_primary;
+    border: 1px solid $separator;
+    border-radius: 4px;
+    padding: 4px 8px;
+}
+
+/* ---------- Sidebar ---------- */
+
+QWidget#Sidebar {
+    background: $sidebar;
+    border-right: 1px solid $separator;
+}
+
+QLabel#SidebarTitle {
+    font-size: 15px;
+    font-weight: 600;
+    padding: 4px 10px;
+}
+
+QLabel#SidebarFooter {
+    color: $text_secondary;
+    font-size: 11px;
+    padding: 4px 10px;
+}
+
+QListWidget#SidebarList {
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+QListWidget#SidebarList::item {
+    padding: 6px 8px;
+    margin: 1px 0;
+    border-radius: ${radius_control}px;
+    color: $text_primary;
+}
+
+QListWidget#SidebarList::item:selected {
+    background: $sidebar_selected;
+    color: $text_primary;
+}
+
+/* ---------- Páginas ---------- */
+
+QStackedWidget#Content, QWidget#Page, QScrollArea#PageScroll, QWidget#PageBody {
+    background: $content;
+    border: none;
+}
+
+QLabel#PageTitle {
+    font-size: ${font_title}px;
+    font-weight: 600;
+}
+
+QLabel#PageSubtitle, QLabel#Hint {
+    color: $text_secondary;
+}
+
+QLabel#SectionTitle {
+    color: $text_secondary;
+    font-weight: 600;
+    padding-left: 4px;
+}
+
+QFrame#Card {
+    background: $card;
+    border: 1px solid $separator;
+    border-radius: ${radius_card}px;
+}
+
+QFrame#Card QLabel {
+    background: transparent;
+}
+
+QFrame#RowSeparator {
+    background: $separator;
+    border: none;
+    min-height: 1px;
+    max-height: 1px;
+}
+
+QLabel#Mono {
+    font-family: "$font_mono";
+    font-size: 12px;
+    background: $content;
+    border: 1px solid $separator;
+    border-radius: 6px;
+    padding: 6px 8px;
+}
+
+QLabel#EmptyTitle {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+/* ---------- Botones ---------- */
+
+QPushButton {
+    background: $card;
+    border: 1px solid $border_strong;
+    border-radius: ${radius_control}px;
+    padding: 5px 14px;
+    min-height: 18px;
+}
+
+QPushButton:hover {
+    background: $control_hover;
+}
+
+QPushButton:pressed {
+    background: $control_pressed;
+}
+
+QPushButton:disabled {
+    color: $text_secondary;
+    background: $content;
+}
+
+QPushButton[variant="primary"] {
+    background: $accent;
+    border: 1px solid $accent;
+    color: $on_accent;
+    font-weight: 500;
+}
+
+QPushButton[variant="primary"]:pressed {
+    background: $accent_pressed;
+    border-color: $accent_pressed;
+}
+
+QPushButton[variant="primary"]:disabled {
+    background: $track;
+    border-color: $track;
+    color: $text_secondary;
+}
+
+QPushButton[variant="plain"] {
+    background: transparent;
+    border: none;
+    color: $accent_text;
+    padding: 5px 6px;
+}
+
+QPushButton[variant="plain"]:pressed {
+    color: $text_primary;
+}
+
+/* ---------- Campos ---------- */
+
+QLineEdit, QPlainTextEdit, QComboBox {
+    background: $card;
+    border: 1px solid $border_strong;
+    border-radius: ${radius_control}px;
+    padding: 5px 8px;
+    selection-background-color: $accent;
+    selection-color: $on_accent;
+}
+
+/* El borde de foco de 2 px imita el anillo de foco de macOS sin blur ni transparencia; el padding
+   se reduce 1 px para que el contenido no salte al enfocar. */
+QLineEdit:focus, QPlainTextEdit:focus, QComboBox:focus {
+    border: 2px solid $accent;
+    padding: 4px 7px;
+}
+
+QPlainTextEdit[mono="true"] {
+    font-family: "$font_mono";
+    font-size: 12px;
+}
+
+QPlainTextEdit[readOnly="true"] {
+    background: $content;
+}
+
+QComboBox::drop-down {
+    border: none;
+    width: 22px;
+}
+
+QComboBox::down-arrow {
+    image: url("$chevron");
+    width: 10px;
+    height: 10px;
+}
+
+QComboBox QAbstractItemView {
+    background: $card;
+    border: 1px solid $separator;
+    selection-background-color: $accent;
+    selection-color: $on_accent;
+    outline: none;
+    padding: 4px;
+}
+
+/* ---------- Progreso ---------- */
+
+QProgressBar {
+    background: $track;
+    border: none;
+    border-radius: 3px;
+    max-height: 6px;
+    min-height: 6px;
+}
+
+QProgressBar::chunk {
+    background: $accent;
+    border-radius: 3px;
+}
+
+/* ---------- Zona de arrastre ---------- */
+
+QFrame#DropZone {
+    background: $card;
+    border: 1.5px dashed $border_strong;
+    border-radius: ${radius_card}px;
+}
+
+QFrame#DropZone[dragging="true"] {
+    background: $info_bg;
+    border-color: $accent;
+}
+
+/* ---------- Banner ---------- */
+
+QFrame#Banner {
+    border-radius: 8px;
+    border: 1px solid $separator;
+}
+
+QFrame#Banner[kind="info"] { background: $info_bg; }
+QFrame#Banner[kind="success"] { background: $success_bg; }
+QFrame#Banner[kind="error"] { background: $danger_bg; }
+
+QFrame#Banner QLabel {
+    background: transparent;
+}
+
+/* ---------- Tablas (historial) ---------- */
+
+QTreeWidget {
+    background: $card;
+    alternate-background-color: $content;
+    border: 1px solid $separator;
+    border-radius: ${radius_card}px;
+    outline: none;
+    padding: 4px;
+}
+
+QTreeWidget::item {
+    padding: 5px 4px;
+    border: none;
+}
+
+QTreeWidget::item:selected {
+    background: $accent;
+    color: $on_accent;
+}
+
+QHeaderView::section {
+    background: $card;
+    color: $text_secondary;
+    font-weight: 600;
+    border: none;
+    border-bottom: 1px solid $separator;
+    padding: 6px 4px;
+}
+
+/* ---------- Scrollbars ---------- */
+
+QScrollBar:vertical, QScrollBar:horizontal {
+    background: transparent;
+    border: none;
+    margin: 2px;
+}
+
+QScrollBar:vertical { width: 10px; }
+QScrollBar:horizontal { height: 10px; }
+
+QScrollBar::handle {
+    background: $border_strong;
+    border-radius: 3px;
+    min-height: 30px;
+    min-width: 30px;
+}
+
+QScrollBar::add-line, QScrollBar::sub-line,
+QScrollBar::add-page, QScrollBar::sub-page {
+    background: none;
+    border: none;
+    width: 0;
+    height: 0;
+}

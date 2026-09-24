@@ -1,0 +1,4 @@
+#!/bin/sh
+# Punto de entrada del AppImage: lanza el ejecutable de PyInstaller empaquetado en usr/lib.
+HERE="$(dirname "$(readlink -f "$0")")"
+exec "$HERE/usr/lib/pycronk/pycronk" "$@"
