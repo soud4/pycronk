@@ -63,13 +63,26 @@ class TaskRunner(QObject):
         self._pool.setMaxThreadCount(max_threads)
         self._running: set[Task] = set()
 
-    def start(self, job: Job) -> Task:
+    def create(self, job: Job) -> Task:
+        """Construye la tarea y conecta su limpieza sin encolarla todavía.
+
+        Separado de `start` para que quien llame pueda conectar sus propias señales antes de que
+        el job pueda ejecutarse: una vez encolada, un hilo del pool podría terminarla antes de que
+        el llamador llegue a conectar, y una señal emitida sin oyentes se pierde para siempre.
+        """
         task = Task(job)
         self._running.add(task)
         for signal in (task.signals.finished, task.signals.failed):
             signal.connect(lambda _r, t=task: self._running.discard(t))
         task.signals.cancelled.connect(lambda t=task: self._running.discard(t))
+        return task
+
+    def submit(self, task: Task) -> None:
         self._pool.start(task)
+
+    def start(self, job: Job) -> Task:
+        task = self.create(job)
+        self.submit(task)
         return task
 
     def wait(self, msecs: int = -1) -> bool:

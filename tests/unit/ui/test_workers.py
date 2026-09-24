@@ -19,18 +19,19 @@ def test_finished_with_result_and_progress(qtbot, runner):
         report(4, 4)
         return 42
 
-    task = runner.start(job)
+    task = runner.create(job)
     task.signals.progress.connect(progress.append)
     with qtbot.waitSignal(task.signals.finished) as blocker:
-        pass
+        runner.submit(task)
     assert blocker.args == [42]
     qtbot.waitUntil(lambda: progress == [0.25, 1.0])
 
 
 def test_progress_with_zero_total_is_complete(qtbot, runner):
     progress: list[float] = []
-    task = runner.start(lambda report, _c: report(0, 0))
+    task = runner.create(lambda report, _c: report(0, 0))
     task.signals.progress.connect(progress.append)
+    runner.submit(task)
     qtbot.waitUntil(lambda: progress == [1.0])
 
 
@@ -38,9 +39,9 @@ def test_failure_is_reported(qtbot, runner):
     def job(_report, _cancel):
         raise ValueError("boom")
 
-    task = runner.start(job)
+    task = runner.create(job)
     with qtbot.waitSignal(task.signals.failed) as blocker:
-        pass
+        runner.submit(task)
     assert isinstance(blocker.args[0], ValueError)
 
 
