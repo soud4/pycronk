@@ -4,6 +4,7 @@ import pytest
 from PySide6.QtWidgets import QMessageBox
 
 from pycronk.core.api import Cryptor
+from pycronk.core.armor.base64_armor import B64_MAGIC
 from pycronk.core.interfaces import Keys
 from pycronk.persistence.sqlite_settings import SqliteSettingsRepository
 from pycronk.services.crypto_service import CryptoService
@@ -72,7 +73,7 @@ def test_text_encrypt_then_decrypt(qtbot, text_page):
     with qtbot.waitSignal(traces.changed):
         page.run()
     armored = page.output.toPlainText()
-    assert armored.startswith("PCRK1:")
+    assert not armored.startswith("PCRK1:")
     assert traces.latest is not None and traces.latest.operation is Operation.ENCRYPT
     assert page.process_button.isVisibleTo(page)
 
@@ -85,10 +86,10 @@ def test_text_encrypt_then_decrypt(qtbot, text_page):
 
 def test_text_autodetect_only_on_transition(text_page):
     page, _, _ = text_page
-    page.input.setPlainText("PCRK1:AAAA")
+    page.input.setPlainText(B64_MAGIC + "AAAA")
     assert page.operation is Operation.DECRYPT
     page.mode.set_current_index(0)  # el usuario fuerza Cifrar
-    page.input.setPlainText("PCRK1:AAAAAAAA")
+    page.input.setPlainText(B64_MAGIC + "AAAAAAAA")
     assert page.operation is Operation.ENCRYPT
     page.input.setPlainText("texto normal")
     assert page.operation is Operation.ENCRYPT
@@ -97,7 +98,7 @@ def test_text_autodetect_only_on_transition(text_page):
 def test_text_error_is_shown(qtbot, text_page):
     page, _, _ = text_page
     fill_keys(page.keys_form)
-    page.input.setPlainText("PCRK1:@@@")
+    page.input.setPlainText(B64_MAGIC + "@@@")
     page.run()
     qtbot.waitUntil(lambda: page.run_button.isEnabled())
     assert page.banner.property("kind") == "error"

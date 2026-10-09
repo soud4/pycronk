@@ -3,6 +3,7 @@ import io
 import pytest
 
 from pycronk.cli import NullHistory, main
+from pycronk.core.armor.base64_armor import B64_MAGIC
 
 KEYS = ["-m", "MAR7", "-k", "otra"]
 
@@ -10,7 +11,7 @@ KEYS = ["-m", "MAR7", "-k", "otra"]
 def test_text_round_trip(capsys):
     assert main(["encrypt-text", "hola mundo", *KEYS]) == 0
     armored = capsys.readouterr().out.strip()
-    assert armored.startswith("PCRK1:")
+    assert not armored.startswith("PCRK1:")
     assert main(["decrypt-text", armored, *KEYS]) == 0
     assert capsys.readouterr().out == "hola mundo\n"
 
@@ -39,7 +40,7 @@ def test_prompts_for_missing_passwords(monkeypatch, capsys):
     answers = iter(["MAR7", "otra"])
     monkeypatch.setattr("getpass.getpass", lambda _prompt: next(answers))
     assert main(["encrypt-text", "x"]) == 0
-    assert capsys.readouterr().out.startswith("PCRK1:")
+    assert capsys.readouterr().out.startswith(B64_MAGIC)
 
 
 def test_errors_return_1(tmp_path, capsys):

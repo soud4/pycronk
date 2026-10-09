@@ -111,7 +111,7 @@ class ProcessPage(PageWidget):
         final = LayerCard(
             "Salida",
             "Los símbolos se empaquetan en bytes, se antepone la cabecera del contenedor y el "
-            "conjunto se codifica en Base64 con el prefijo PCRK1:."
+            "conjunto se codifica en Base64."
             if encrypt
             else "Los símbolos se reagrupan en bytes, se descarta la cabecera de longitud y se "
             "decodifica como UTF-8.",

@@ -30,7 +30,7 @@ intercambiar `π[i]` y `π[j]`. Salida: `out[i] = in[π[i]]`.
 
 ## Capa 4 — Codificación
 - Archivos: los símbolos se empaquetan de nuevo a 8 bits (sin expansión).
-- Texto: el contenedor completo se codifica en Base64 con el prefijo `PCRK1:` (spec 004).
+- Texto: el contenedor completo se codifica en Base64 (spec 004).
 
 ## Cabecera de longitud
 Antes de simbolizar se antepone la longitud original como `u64` big-endian. Viaja cifrada y

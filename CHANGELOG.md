@@ -8,7 +8,8 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/). V
 - Arquitectura modular `core` / `services` / `persistence` / `ui` con puntos de extensión por
   `Protocol` (motores, capas, KDF, armor, repositorios, páginas, iconos). Ver `docs/specs/`.
 - Cifrado de **archivos** de cualquier tamaño por chunks, con progreso y cancelación.
-- Contenedor binario versionado (`PCRK`) que registra el motor usado; texto como `PCRK1:` + Base64.
+- Contenedor binario versionado (`PCRK`) que registra el motor usado; texto como Base64 del mismo
+  contenedor.
 - Interfaz estilo macOS (colores sólidos, tema claro/oscuro que sigue al sistema, iconos Phosphor).
 - Historial y ajustes en SQLite (solo metadatos).
 - CLI `pycronk-cli`.
@@ -20,3 +21,7 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/). V
 - Migración de PyQt6 a PySide6 (licencia LGPL).
 - La cabecera de longitud pasa de 24 bits (~2 MB) a 64 bits. Los textos cifrados con el
   prototipo **no** son compatibles con este formato.
+- El texto cifrado ya no lleva el prefijo `PCRK1:`: es Base64 puro del contenedor. La
+  autodetección usa los 4 primeros caracteres (`UENS`), en los que Base64 codifica siempre los 3
+  primeros bytes del magic, así que el prefijo era redundante. Los textos que ya lo llevan se
+  siguen descifrando.

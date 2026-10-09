@@ -27,8 +27,7 @@ class TextPage(PageWidget):
     title = "Texto"
     icon = "text"
     subtitle = (
-        "Cifra o descifra mensajes. El texto cifrado empieza con PCRK1: y se puede pegar en "
-        "cualquier sitio."
+        "Cifra o descifra mensajes. El texto cifrado es Base64 y se puede pegar en cualquier sitio."
     )
 
     def __init__(

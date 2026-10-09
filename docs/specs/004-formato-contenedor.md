@@ -42,8 +42,12 @@ caché). Para ir más rápido habría que compilar ese bucle (numba o una extens
 motor `pycronk-v2` con una permutación vectorizable; `v1` no puede cambiar sin romper archivos.
 
 ## Texto
-`PCRK1:` + Base64 estándar del contenedor completo. El prefijo permite que la app detecte
-automáticamente si lo pegado es un cifrado.
+Base64 estándar del contenedor completo, sin prefijo.
+
+La app detecta automáticamente si lo pegado es un cifrado mirando los 4 primeros caracteres:
+Base64 agrupa de 3 en 3 bytes, así que los 3 primeros del magic (`PCR`) se codifican siempre como
+`UENS` sea cual sea el resto del contenedor. Por eso no hace falta un prefijo propio; hasta la
+v0.1.0 se emitía `PCRK1:`, que hoy solo se acepta al descifrar.
 
 ## Errores
 | Situación | Excepción |

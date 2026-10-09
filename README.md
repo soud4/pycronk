@@ -46,7 +46,7 @@ ruff check . && pyright    # lint y tipos
 ```bash
 pycronk-cli encrypt foto.jpg -m "clave matriz" -k "clave keystream"      # → foto.jpg.pcrk
 pycronk-cli decrypt foto.jpg.pcrk -m "clave matriz" -k "clave keystream" # → foto.jpg
-echo "hola" | pycronk-cli encrypt-text -m a -k b                        # → PCRK1:...
+echo "hola" | pycronk-cli encrypt-text -m a -k b                        # → UENSSwEK...
 ```
 
 Si omites `-m` o `-k`, la CLI pide la contraseña sin mostrarla en pantalla.
