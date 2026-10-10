@@ -3,7 +3,7 @@ name: Docs
 on:
   push:
     branches: [main]
-    paths: ["site/**", ".github/workflows/docs.yml"]
+    paths: ["sites/**", ".github/workflows/docs.yml"]
   workflow_dispatch:
 
 permissions:
@@ -27,10 +27,10 @@ jobs:
 
       - uses: actions/configure-pages@v5
 
-      - name: Empaquetar site/
+      - name: Empaquetar sites/
         uses: actions/upload-pages-artifact@v3
         with:
-          path: site
+          path: sites
 
       - id: deploy
         uses: actions/deploy-pages@v4
